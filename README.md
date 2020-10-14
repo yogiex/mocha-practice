@@ -14,6 +14,4 @@ testing pada setiap end-point
 - [x] get data
 - [x] post data
 - [ ] delete id
-- [ ] update data
-# npm run test
-![fig1](https://i.ibb.co/HnJP6X5/image.png)
+
