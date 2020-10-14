@@ -14,4 +14,4 @@ testing pada setiap end-point
 - [x] get data
 - [x] post data
 - [ ] delete id
-- [ ] update data
+
