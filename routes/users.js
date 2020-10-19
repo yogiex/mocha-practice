@@ -20,9 +20,13 @@ router.get('/users/:id', async (req, res, next) => {
   const data = await dataModel.find({_id:req.params.id});
 
   try {
-    res.send(data)
+    if(!data){
+      await res.status(500).send({msg: "id tidak ada"})
+    }else{
+      await res.send(data)
+    }
   } catch (error) {
-    res.status(500).send(err);
+    await res.status(500).send({msg:"error"});
   }
 });
 
@@ -32,9 +36,9 @@ router.post('/users', async (req, res) => {
 
   try {
     data.save();
-    res.send(data);
+    await res.send(data);
   } catch (error) {
-    res.status(500).send(err);
+    await res.status(500).send(err);
   }
 })
 // * edit one data
@@ -53,11 +57,11 @@ router.put ('/users/:id', async function (req, res, next) {
           },
           multi: true,
         },
-        function (err, result) {
+        async function (err, result) {
           if (err) {
-            res.send ({msg: 'gagal update karena id tidak ada'});
+            await res.send ({msg: 'gagal update karena id tidak ada'});
           } else {
-            res.send({msg:"updated"})
+            await res.send({msg:"updated"})
             //res.redirect ('/');
           }
         }

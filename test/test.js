@@ -32,7 +32,7 @@ describe('GET retrieve all data in database /users', () => {
          
     })
 })
-describe('GET one data by idin database /users', () => {
+describe('GET one data by id in database /users', () => {
     it('It return OK', async () => {
         try {
             await chai.request('http://127.0.0.1:3000')
@@ -52,7 +52,7 @@ describe('POST data insert in database /users',() =>{
             await chai.request('http://127.0.0.1:3000')
             .post('/users')
             .type('form')
-            .send(({'nama':"value testing","asal":"value testing"}))   
+            .send(({nama:"value testing",asal:"value testing"}))   
             
         } catch (error) {
             //res.send({msg:"error"})
@@ -68,7 +68,7 @@ describe('PUT data edit in database /users',() =>{
             await chai.request('http://127.0.0.1:3000')
             .put('/users/5f8dbff760c16f16e98225a7')
             .type('form')
-            .send(({'nama':"yogi chai","asal":"value asal"}))   
+            .send(({nama:"yogi chai",asal:"value asal"}))   
             
         } catch (error) {
             //res.send({msg:"error"})
