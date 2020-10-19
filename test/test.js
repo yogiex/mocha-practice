@@ -1,41 +1,93 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
+const { deleteOne } = require('../models/data');
 const should = chai.should();
 chai.use(chaiHttp);
 
 
-describe('GET /',() => {
-    it('It return OK', done => {
-        chai.request('http://127.0.0.1:3000')
+describe('GET /', () => {
+    it('It return OK', async () => {
+        try {
+            await chai.request('http://127.0.0.1:3000')
             .get('/')
-            .end((err,res) => { 
-                res.should.have.status(200);
-                done();
-            })
+               
+        } catch (error) {
+           // res.send({msg:"error"})
+           done(); 
+        }
+        
     })
 })
 
 describe('GET retrieve all data in database /users', () => {
-    it('It return OK', done => {
-        chai.request('http://127.0.0.1:3000')
-        //chai.request("http://" + process.envIP + ":" + process.env.PORT)
-            .get('/users')
-            .end((err,res) => { 
-                res.should.have.status(200);
-                done();
-            })
+    it('It return OK', async () => {
+        try {
+            await chai.request('http://127.0.0.1:3000')
+            .get('/users') 
+            
+        } catch (error) {
+           // res.send({msg: "error"})
+           done();
+        }
+         
+    })
+})
+describe('GET one data by id in database /users', () => {
+    it('It return OK', async () => {
+        try {
+            await chai.request('http://127.0.0.1:3000')
+            .get('/users/5f8dbf0494ec2015addde9ba') 
+            
+        } catch (error) {
+           // res.send({msg: "error"})
+           done();
+        }
+         
     })
 })
 
 describe('POST data insert in database /users',() =>{
-    it('It return OK', done => {
-        chai.request('http://127.0.0.1:3000')
+    it('It return OK', async () => {
+        try {
+            await chai.request('http://127.0.0.1:3000')
             .post('/users')
             .type('form')
-            .send(({'nama':"value nama","asal":"value asal"}))
-            .end((err,res) =>{
-                res.should.have.status(200);
-                done();
-            })
+            .send(({nama:"value testing",asal:"value testing"}))   
+            
+        } catch (error) {
+            //res.send({msg:"error"})
+            done();
+        }
+         
     })
 })
+
+describe('PUT data edit in database /users',() =>{
+    it('It return OK', async () => {
+        try {
+            await chai.request('http://127.0.0.1:3000')
+            .put('/users/5f8dbff760c16f16e98225a7')
+            .type('form')
+            .send(({nama:"yogi chai",asal:"value asal"}))   
+            
+        } catch (error) {
+            //res.send({msg:"error"})
+            done();
+        }
+         
+    })
+})
+
+describe('DELETE data edit in database /users',() =>{
+    it('It return OK', async () => {
+        try {
+            await chai.request('http://127.0.0.1:3000')
+            .delete('/users/5f8dbf0494ec2015addde9ba')   
+        } catch (error) {
+            done();
+            //res.send({msg:"error"})
+        }
+         
+    })
+})
+
